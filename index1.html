@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <a href="contact.html"> l</a>
+    <link href="stylesheet.css" rel="stylesheet">
+  
+</head>
+<body>
+     <!-- HTML Structure -->
+   <header>
+ <nav>
+     <div class="nav-container">
+         <a href="index.html" class="logo">
+             <img src="talib.png" alt="Talib Hussain Logo" style="vertical-align: middle; height: 40px;">
+             <span style="vertical-align: middle; font-size: 1.5rem; font-weight: 600; margin-left: 10px;">TALIB HUSSAIN</span>
+         </a>
+         <ul class="nav-links">
+             <li><a href="index.html" class="active">Home</a></li>
+             <li><a href="portfolio.html">Portfolio</a></li>
+           
+             <li><a href="contact.html">Contact</a></li>
+         </ul>
+         <button class="hamburger">
+             <span></span>
+             <span></span>
+             <span></span>
+         </button>
+     </div>
+ </nav>
+ 
+ 
+    <script>
+        // JavaScript Functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navItems = document.querySelectorAll('.nav-links a');
+        
+        // Toggle mobile menu
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+        
+        // Close menu on link click (mobile)
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+        
+        // Update active class on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const scrollPosition = window.pageYOffset;
+            
+            sections.forEach(section => {
+                if (scrollPosition >= section.offsetTop - 300) {
+                    const id = section.getAttribute('id');
+                    navItems.forEach(item => {
+                        item.classList.remove('active');
+                        if (item.getAttribute('href') === `#${id}`) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.project-card, .skill-item').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Creative Developer & Designer</h1>
+                <p>Turning ideas into beautiful digital experiences through code and design.</p>
+                <button class="cta">View My Work</button>
+            </div>
+            <div class="hero-illustration">
+                <img src="talib1.jpg" alt="Illustration" class="TALIB HUSSAIN">
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Project cards would be added here -->
+            </div>
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <div class="container">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <!-- Skill items would be added here -->
+            </div>
+        </div>
+    </section>
+
+    <button id="scrollToTop" style="display: none; position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; background: var(--primary); color: white; border: none; border-radius: 50%; cursor: pointer;">↑</button>
+    <script>
+        // Scroll-to-top functionality
+        const scrollToTopButton = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopButton.style.display = 'block';
+            } else {
+                scrollToTopButton.style.display = 'none';
+            }
+        });
+
+        scrollToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
